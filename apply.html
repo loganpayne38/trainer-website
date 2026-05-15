@@ -206,6 +206,35 @@
         </select>
       </div>
     </div>
+
+    <div class="field">
+      <label>How do parents book you today? <span class="req">*</span></label>
+      <select required name="scheduling">
+        <option value="" disabled selected>Pick one</option>
+        <option>I have a Cal.com or Calendly booking link</option>
+        <option>I schedule by text / DM right now — happy to set up a free booking link</option>
+        <option>Phone calls only</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>If you have a booking link, paste it here</label>
+      <input type="url" name="booking_url" placeholder="https://cal.com/yourname or https://calendly.com/..."/>
+      <p class="hint">No link yet? No problem — we'll help you set up a free Cal.com account during onboarding.</p>
+    </div>
+
+    <div class="field">
+      <label>How do you collect payment from parents today? <span class="req">*</span></label>
+      <select required name="payment_method">
+        <option value="" disabled selected>Pick one</option>
+        <option>Venmo</option>
+        <option>Square</option>
+        <option>Stripe / payment link</option>
+        <option>Cash / check</option>
+        <option>Mix of the above</option>
+        <option>Haven't set this up yet</option>
+      </select>
+    </div>
   </div>
 
   <div class="form-section">
