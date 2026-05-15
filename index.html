@@ -88,6 +88,20 @@
   footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
   footer .logo{color:#fff}
   footer small{font-size:13px}
+  /* Founder */
+  .founder-block{display:grid;grid-template-columns:160px 1fr;gap:36px;align-items:center;max-width:880px;margin:0 auto;padding:20px 0}
+  .avatar{width:140px;height:140px;border-radius:50%;background:var(--navy);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Inter Tight';font-weight:900;font-size:48px;letter-spacing:-2px;border:4px solid var(--orange)}
+  .founder-text .kicker{margin-bottom:6px}
+  .founder-text h2{margin:6px 0 16px}
+  .founder-text p{color:var(--muted);line-height:1.55;font-size:17px;max-width:580px;margin-bottom:14px}
+  .signature{font-family:'Inter Tight';font-weight:700;color:var(--navy) !important;font-size:15px !important;margin-top:4px !important}
+  @media (max-width:720px){.founder-block{grid-template-columns:1fr;text-align:left;gap:18px}}
+  /* Form extras */
+  form select{padding:14px 16px;border-radius:10px;border:1px solid var(--line);font-size:15px;font-family:inherit;background-color:var(--cream);color:var(--ink);cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230B2545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:44px}
+  .contact-pref{display:flex;align-items:center;gap:18px;padding:4px 4px 0;font-size:14px;color:var(--muted);flex-wrap:wrap}
+  .contact-pref .contact-label{font-weight:600;color:var(--navy);margin-right:4px}
+  .contact-pref label{display:inline-flex;align-items:center;gap:6px;cursor:pointer;color:var(--ink)}
+  .contact-pref input[type="radio"]{accent-color:var(--orange);width:16px;height:16px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -103,7 +117,7 @@
       <a href="#trainers">For trainers</a>
       <a href="#faq">FAQ</a>
     </div>
-    <a href="#waitlist" class="nav-cta">Get matched</a>
+    <a href="/find-coach" class="nav-cta">Get matched</a>
   </div>
 </nav>
 
@@ -113,12 +127,12 @@
     <h1>The right coach.<br><em>Right now.</em></h1>
     <p class="lede">Trainer connects Utah parents with vetted, results-driven youth football coaches. We do the homework on every trainer so you can focus on your athlete.</p>
     <div class="cta-row">
-      <a href="#waitlist" class="btn btn-primary">Find a coach →</a>
-      <a href="#trainers" class="btn btn-ghost">I'm a trainer</a>
+      <a href="/find-coach" class="btn btn-primary">Find a coach →</a>
+      <a href="/apply" class="btn btn-ghost">I'm a trainer</a>
     </div>
     <div class="stats">
       <div class="stat"><div class="n">100%</div><div class="l">Background checked</div></div>
-      <div class="stat"><div class="n">1:1</div><div class="l">Personal matching</div></div>
+      <div class="stat"><div class="n">48 hr</div><div class="l">Average match time</div></div>
       <div class="stat"><div class="n">$0</div><div class="l">To get matched</div></div>
     </div>
   </div>
@@ -138,7 +152,7 @@
       <div class="card">
         <div class="num">02</div>
         <h3>We hand-pick your match</h3>
-        <p>We personally vet every trainer in the network. You get up to three options with track records, certifications, and prior families to call.</p>
+        <p>Within 48 hours of your intake, we send up to three vetted coaches with track records, certifications, and prior families to call.</p>
       </div>
       <div class="card">
         <div class="num">03</div>
@@ -165,6 +179,21 @@
   </div>
 </section>
 
+<section id="founder" style="border-top:none;padding-top:0;padding-bottom:80px">
+  <div class="wrap">
+    <div class="founder-block">
+      <div class="avatar">LP</div>
+      <div class="founder-text">
+        <div class="kicker">Who's behind this</div>
+        <h2>Why I started Trainer.</h2>
+        <p>Growing up, finding a trainer was hard. Pinning down their schedule was harder. And knowing what it was actually going to cost? Forget it.</p>
+        <p>I built Trainer so Utah parents don't have to play that game. One place to find a coach you trust, lock in a schedule, and know what's coming next.</p>
+        <p class="signature">— Logan Payne, Founder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="trainers" style="border-top:none;padding-top:0">
   <div class="wrap">
     <div class="kicker">Two sides of the field</div>
@@ -176,8 +205,22 @@
         <form id="parent-form" onsubmit="return submitForm(event,'parent')">
           <input required type="text" name="name" placeholder="Your name"/>
           <input required type="email" name="email" placeholder="Email"/>
+          <input type="tel" name="phone" placeholder="Phone (optional, for text updates)"/>
           <input required type="text" name="kid" placeholder="Athlete's age + position (e.g. 12, QB)"/>
           <input type="text" name="city" placeholder="City (Provo, Lehi, SLC...)"/>
+          <input required type="text" name="goal" placeholder="What's the goal? (mechanics, speed, recruiting, etc.)"/>
+          <select required name="budget">
+            <option value="" disabled selected>Budget per session</option>
+            <option value="60-80">$60–$80</option>
+            <option value="80-120">$80–$120</option>
+            <option value="120+">$120+</option>
+            <option value="unsure">Not sure yet</option>
+          </select>
+          <div class="contact-pref">
+            <span class="contact-label">Best way to reach you:</span>
+            <label><input type="radio" name="contact" value="email" checked/> Email</label>
+            <label><input type="radio" name="contact" value="text"/> Text</label>
+          </div>
           <button class="btn btn-primary" type="submit">Get matched →</button>
         </form>
       </div>
@@ -201,7 +244,10 @@
     <div class="kicker">FAQ</div>
     <h2>Questions parents ask first.</h2>
     <details><summary>What does Trainer cost parents?</summary><p>Nothing to get matched. You pay your coach directly at their normal rate. We earn a small placement fee from the trainer when you book — it doesn't change what you pay.</p></details>
+    <details><summary>How fast will you respond?</summary><p>Within 24 hours, usually faster. We're a small team — Logan answers most messages himself, so you're not getting bounced through a chatbot.</p></details>
     <details><summary>What ages and sports?</summary><p>We're starting with football, ages 8–18, anywhere in Utah. Other sports coming soon. Tell us what you need and we'll get the right coach.</p></details>
+    <details><summary>Do you help with college recruiting?</summary><p>Yes. Several of our coaches specialize in recruit prep — film breakdowns, position-coach intros, and helping showcase your athlete to college programs. Tell us your timeline and we'll match accordingly.</p></details>
+    <details><summary>Can you do group or team sessions?</summary><p>Most of our coaches offer both 1:1 and small-group rates. Group sessions are typically $30–$50 per kid. We can also coordinate team training if you've got a youth or high school squad.</p></details>
     <details><summary>How do you vet trainers?</summary><p>Background check, three reference calls with prior families, verification of any coaching certifications or playing history, and a video intro. We turn down most applicants.</p></details>
     <details><summary>What if my kid doesn't click with the coach?</summary><p>Tell us within the first two sessions and we'll re-match you at no extra cost.</p></details>
     <details><summary>Can my kid's existing coach join?</summary><p>Yes. Have them visit this page and join the network. We'll get them in front of more families.</p></details>
