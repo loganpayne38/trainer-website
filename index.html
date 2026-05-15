@@ -90,7 +90,8 @@
   footer small{font-size:13px}
   /* Founder */
   .founder-block{display:grid;grid-template-columns:160px 1fr;gap:36px;align-items:center;max-width:880px;margin:0 auto;padding:20px 0}
-  .avatar{width:140px;height:140px;border-radius:50%;background:var(--navy);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Inter Tight';font-weight:900;font-size:48px;letter-spacing:-2px;border:4px solid var(--orange)}
+  .avatar{width:140px;height:140px;border-radius:50%;background:var(--navy);color:var(--cream);display:flex;align-items:center;justify-content:center;font-family:'Inter Tight';font-weight:900;font-size:48px;letter-spacing:-2px;border:4px solid var(--orange);overflow:hidden}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
   .founder-text .kicker{margin-bottom:6px}
   .founder-text h2{margin:6px 0 16px}
   .founder-text p{color:var(--muted);line-height:1.55;font-size:17px;max-width:580px;margin-bottom:14px}
@@ -182,11 +183,11 @@
 <section id="founder" style="border-top:none;padding-top:0;padding-bottom:80px">
   <div class="wrap">
     <div class="founder-block">
-      <div class="avatar">LP</div>
+      <div class="avatar"><img src="logan.jpg" alt="Logan Payne, Founder of Trainer"/></div>
       <div class="founder-text">
         <div class="kicker">Who's behind this</div>
         <h2>Why I started Trainer.</h2>
-        <p>Growing up, finding a trainer was hard. Pinning down their schedule was harder. And knowing what it was actually going to cost? Forget it.</p>
+        <p>Growing up, finding a trainer was hard. Pinning down their schedule was harder. Knowing what it was going to cost? Forget it. And the right coach at the right time is what got me to Division 1 football — I know how much it matters.</p>
         <p>I built Trainer so Utah parents don't have to play that game. One place to find a coach you trust, lock in a schedule, and know what's coming next.</p>
         <p class="signature">— Logan Payne, Founder</p>
       </div>
