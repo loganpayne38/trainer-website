@@ -202,7 +202,9 @@
       <div class="pane">
         <h3>Parents</h3>
         <p>Stop calling around. Tell us what your kid is working on and we'll send back coaches who've already done it.</p>
-        <form id="parent-form" onsubmit="return submitForm(event,'parent')">
+        <form id="parent-form" action="https://formspree.io/f/xzdonrjn" method="POST" onsubmit="return submitForm(event,'parent')">
+          <input type="hidden" name="_subject" value="Parent inquiry from homepage"/>
+          <input type="hidden" name="form_type" value="Parent — homepage quick form"/>
           <input required type="text" name="name" placeholder="Your name"/>
           <input required type="email" name="email" placeholder="Email"/>
           <input type="tel" name="phone" placeholder="Phone (optional, for text updates)"/>
@@ -227,7 +229,9 @@
       <div class="pane dark" id="waitlist">
         <h3>Coaches</h3>
         <p>Stop chasing leads on Instagram. Get matched with serious families who already know your rate.</p>
-        <form id="trainer-form" onsubmit="return submitForm(event,'trainer')">
+        <form id="trainer-form" action="https://formspree.io/f/mzdonrkn" method="POST" onsubmit="return submitForm(event,'trainer')">
+          <input type="hidden" name="_subject" value="Trainer interest from homepage"/>
+          <input type="hidden" name="form_type" value="Trainer — homepage quick form"/>
           <input required type="text" name="name" placeholder="Your name"/>
           <input required type="email" name="email" placeholder="Email"/>
           <input type="text" name="cert" placeholder="Coaching cert / playing background"/>
@@ -265,13 +269,24 @@
 </footer>
 
 <script>
-  function submitForm(e, who){
+  async function submitForm(e, who){
     e.preventDefault();
     const f = e.target;
-    const data = Object.fromEntries(new FormData(f).entries());
-    // TODO: replace with real endpoint (Formspree, Resend, Supabase, etc.)
-    console.log('Submission', who, data);
-    f.innerHTML = '<div style="padding:24px 0;text-align:center"><div style="font-family:Inter Tight;font-weight:800;font-size:22px;color:'+(who==='trainer'?'#fff':'#0B2545')+'">You’re in.</div><p style="margin:8px 0 0;color:'+(who==='trainer'?'#C8D2E0':'#5B6776')+'">We’ll reach out within 24 hours.</p></div>';
+    const isTrainer = who === 'trainer';
+    const btn = f.querySelector('button[type="submit"]');
+    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    try {
+      const res = await fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      f.innerHTML = '<div style="padding:24px 0;text-align:center"><div style="font-family:Inter Tight;font-weight:800;font-size:22px;color:'+(isTrainer?'#fff':'#0B2545')+'">You’re in.</div><p style="margin:8px 0 0;color:'+(isTrainer?'#C8D2E0':'#5B6776')+'">We’ll reach out within 24 hours.</p></div>';
+    } catch (err) {
+      if (btn){ btn.disabled = false; btn.textContent = isTrainer ? 'Join the network →' : 'Get matched →'; }
+      alert("Hmm — that didn’t send. Please try again, or email trainerutah@gmail.com directly.");
+    }
     return false;
   }
 </script>

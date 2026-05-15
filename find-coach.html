@@ -86,7 +86,9 @@
 </header>
 
 <div class="wrap">
-<form id="parent-intake" onsubmit="return submitIntake(event)">
+<form id="parent-intake" action="https://formspree.io/f/xzdonrjn" method="POST" onsubmit="return submitIntake(event)">
+  <input type="hidden" name="_subject" value="Parent intake — full form"/>
+  <input type="hidden" name="form_type" value="Parent — full intake form"/>
 
   <div class="form-section">
     <p class="section-head">Step 1 of 3</p>
@@ -260,15 +262,25 @@
 </footer>
 
 <script>
-  function submitIntake(e){
+  async function submitIntake(e){
     e.preventDefault();
     const f = e.target;
-    const data = Object.fromEntries(new FormData(f).entries());
-    console.log('Parent intake', data);
-    // TODO: replace with Formspree endpoint, e.g. fetch('https://formspree.io/f/xxxxxxx', { method:'POST', body: new FormData(f) })
-    f.style.display='none';
-    document.getElementById('success').classList.add('show');
-    document.getElementById('success').scrollIntoView({behavior:'smooth',block:'start'});
+    const btn = f.querySelector('button[type="submit"]');
+    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    try {
+      const res = await fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      f.style.display='none';
+      document.getElementById('success').classList.add('show');
+      document.getElementById('success').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch (err) {
+      if (btn){ btn.disabled = false; btn.textContent = 'Send my intake →'; }
+      alert("Hmm — that didn’t send. Please try again, or email trainerutah@gmail.com directly.");
+    }
     return false;
   }
 </script>

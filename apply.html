@@ -89,7 +89,9 @@
 </header>
 
 <div class="wrap">
-<form id="trainer-app" onsubmit="return submitApp(event)">
+<form id="trainer-app" action="https://formspree.io/f/mzdonrkn" method="POST" onsubmit="return submitApp(event)">
+  <input type="hidden" name="_subject" value="Trainer application — full form"/>
+  <input type="hidden" name="form_type" value="Trainer — full application"/>
 
   <div class="form-section">
     <p class="section-head">Step 1 of 3</p>
@@ -260,17 +262,30 @@
 </footer>
 
 <script>
-  function submitApp(e){
+  async function submitApp(e){
     e.preventDefault();
     const f = e.target;
-    const data = Object.fromEntries(new FormData(f).entries());
-    // Multi-select ages
-    data.ages = Array.from(f.querySelectorAll('input[name="ages"]:checked')).map(i=>i.value).join(', ');
-    console.log('Trainer application', data);
-    // TODO: replace with Formspree endpoint, e.g. fetch('https://formspree.io/f/xxxxxxx', { method:'POST', body: new FormData(f) })
-    f.style.display='none';
-    document.getElementById('success').classList.add('show');
-    document.getElementById('success').scrollIntoView({behavior:'smooth',block:'start'});
+    const btn = f.querySelector('button[type="submit"]');
+    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    // Bundle age checkboxes into a single field before POST
+    const fd = new FormData(f);
+    const ages = Array.from(f.querySelectorAll('input[name="ages"]:checked')).map(i=>i.value).join(', ');
+    fd.delete('ages');
+    fd.append('ages', ages);
+    try {
+      const res = await fetch(f.action, {
+        method: 'POST',
+        body: fd,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error('Submission failed');
+      f.style.display='none';
+      document.getElementById('success').classList.add('show');
+      document.getElementById('success').scrollIntoView({behavior:'smooth',block:'start'});
+    } catch (err) {
+      if (btn){ btn.disabled = false; btn.textContent = 'Submit application →'; }
+      alert("Hmm — that didn’t send. Please try again, or email trainerutah@gmail.com directly.");
+    }
     return false;
   }
 </script>
