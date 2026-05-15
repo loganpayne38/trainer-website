@@ -15,6 +15,7 @@
 <meta name="twitter:title" content="Trainer — The right coach. Right now."/>
 <meta name="twitter:description" content="Utah's vetted network of youth football coaches. Hand-matched in 48 hours."/>
 <meta name="twitter:image" content="/og-image.svg"/>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800;900&display=swap" rel="stylesheet">
@@ -91,6 +92,9 @@
   details summary::after{content:'+';font-size:24px;color:var(--orange);font-weight:300}
   details[open] summary::after{content:'−'}
   details p{color:var(--muted);line-height:1.6;margin:12px 0 0}
+  .sticky-cta{position:fixed;bottom:18px;right:18px;background:var(--orange);color:#fff;padding:14px 22px;border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;z-index:50;box-shadow:0 8px 24px rgba(11,37,69,.22);display:none;align-items:center;gap:6px}
+  .sticky-cta:hover{background:#e85a26}
+  @media (max-width:820px){.sticky-cta{display:inline-flex}}
   footer{padding:48px 0;background:var(--ink);color:#A7B5CC}
   footer .row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
   footer .logo{color:#fff}
@@ -214,7 +218,7 @@
         <h2>Why I started Trainer.</h2>
         <p>Growing up, finding a trainer was hard. Pinning down their schedule was harder. Knowing what it was going to cost? Forget it. And the right coach at the right time is what got me to Division 1 football — I know how much it matters.</p>
         <p>I built Trainer so Utah parents don't have to play that game. One place to find a coach you trust, lock in a schedule, and know what's coming next.</p>
-        <p class="signature">— Logan Payne, Founder</p>
+        <p class="signature">— Logan Payne, Founder &middot; <a href="https://instagram.com/logan.payne38" target="_blank" rel="noopener noreferrer" style="color:var(--orange);text-decoration:none">@logan.payne38</a></p>
       </div>
     </div>
   </div>
@@ -237,6 +241,7 @@
             <li>First-team All-State RB · Region 1 Offensive MVP · led Utah 6A in rushing (2021)</li>
             <li>Specializes in RB &amp; LB drills, speed &amp; agility for youth athletes</li>
             <li>Trains athletes in Salt Lake, Davis, Weber &amp; Utah counties</li>
+            <li>Follow on Instagram: <a href="https://instagram.com/logan.payne38" target="_blank" rel="noopener noreferrer" style="color:var(--orange);text-decoration:none;font-weight:600">@logan.payne38</a></li>
           </ul>
           <div class="coach-meta">
             <span class="rate">$50/session · 60 min</span>
@@ -297,6 +302,30 @@
   </div>
 </section>
 
+<section id="checklist" style="border-top:none;padding-top:0">
+  <div class="wrap">
+    <div style="background:var(--navy);color:#fff;border-radius:24px;padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:36px;align-items:center" class="checklist-band">
+      <div>
+        <div class="kicker" style="color:#FFB199">Free parent's guide</div>
+        <h2 style="color:#fff;margin-top:8px">Not ready to get matched yet?</h2>
+        <p class="lede" style="color:#C8D2E0;max-width:none">Grab our 7-question coach evaluation checklist. The exact things to ask <em>any</em> youth football trainer before paying for a session. Free, no spam, takes 3 minutes to read.</p>
+      </div>
+      <form id="checklist-form" action="https://formspree.io/f/xzdonrjn" method="POST" onsubmit="return submitChecklist(event)">
+        <input type="hidden" name="_subject" value="Checklist download — parent lead"/>
+        <input type="hidden" name="form_type" value="Parent — coach checklist download"/>
+        <input required type="text" name="name" placeholder="Your name" style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);font-size:15px;font-family:inherit;background:rgba(255,255,255,.08);color:#fff;margin-bottom:10px"/>
+        <input required type="email" name="email" placeholder="Email" style="width:100%;padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);font-size:15px;font-family:inherit;background:rgba(255,255,255,.08);color:#fff;margin-bottom:14px"/>
+        <button class="btn" type="submit" style="background:var(--orange);color:#fff;width:100%;justify-content:center">Get the checklist →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (max-width:820px){.checklist-band{grid-template-columns:1fr !important;padding:32px !important}}
+  #checklist-form input::placeholder{color:#A7B5CC}
+</style>
+
 <section id="faq">
   <div class="wrap">
     <div class="kicker">FAQ</div>
@@ -322,7 +351,27 @@
   </div>
 </footer>
 
+<a href="/find-coach" class="sticky-cta">Find a coach →</a>
+
 <script>
+  async function submitChecklist(e){
+    e.preventDefault();
+    const f = e.target;
+    const btn = f.querySelector('button[type="submit"]');
+    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
+    try {
+      await fetch(f.action, {
+        method: 'POST',
+        body: new FormData(f),
+        headers: { 'Accept': 'application/json' }
+      });
+    } catch (err) {
+      // Even if logging fails, still give the user the checklist
+    }
+    window.location.href = '/coach-checklist';
+    return false;
+  }
+
   async function submitForm(e, who){
     e.preventDefault();
     const f = e.target;
