@@ -8,6 +8,13 @@
 <meta property="og:title" content="Trainer — The right coach. Right now."/>
 <meta property="og:description" content="Utah's network of vetted youth sports trainers. Starting with football."/>
 <meta property="og:type" content="website"/>
+<meta property="og:image" content="/og-image.svg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Trainer — The right coach. Right now."/>
+<meta name="twitter:description" content="Utah's vetted network of youth football coaches. Hand-matched in 48 hours."/>
+<meta name="twitter:image" content="/og-image.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800;900&display=swap" rel="stylesheet">
@@ -97,6 +104,24 @@
   .founder-text p{color:var(--muted);line-height:1.55;font-size:17px;max-width:580px;margin-bottom:14px}
   .signature{font-family:'Inter Tight';font-weight:700;color:var(--navy) !important;font-size:15px !important;margin-top:4px !important}
   @media (max-width:720px){.founder-block{grid-template-columns:1fr;text-align:left;gap:18px}}
+  /* Coaches */
+  .coach-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px;max-width:880px;margin-left:auto;margin-right:auto}
+  @media (min-width:820px){.coach-grid.three-up{grid-template-columns:repeat(3,1fr)}}
+  .coach-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;display:grid;grid-template-columns:220px 1fr}
+  @media (max-width:680px){.coach-card{grid-template-columns:1fr}}
+  .coach-photo{width:100%;min-height:220px;background:var(--navy);overflow:hidden}
+  .coach-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .coach-body{padding:26px 30px}
+  .coach-tag{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:10px}
+  .coach-name{font-family:'Inter Tight';font-weight:900;font-size:28px;color:var(--navy);margin:0 0 2px;letter-spacing:-1px}
+  .coach-role{font-size:13px;color:var(--orange);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+  .coach-creds{margin:0;padding:0;list-style:none}
+  .coach-creds li{padding:5px 0 5px 24px;position:relative;font-size:14.5px;color:var(--ink);line-height:1.45}
+  .coach-creds li::before{content:"";position:absolute;left:0;top:11px;width:13px;height:7px;border-left:2.5px solid var(--orange);border-bottom:2.5px solid var(--orange);transform:rotate(-45deg)}
+  .coach-meta{display:flex;align-items:center;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;flex-wrap:wrap;gap:10px}
+  .coach-meta .rate{font-weight:700;color:var(--navy);font-family:'Inter Tight'}
+  .coach-meta .book{background:var(--navy);color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;font-size:13px;text-decoration:none}
+  .coach-meta .book:hover{background:var(--ink)}
   /* Form extras */
   form select{padding:14px 16px;border-radius:10px;border:1px solid var(--line);font-size:15px;font-family:inherit;background-color:var(--cream);color:var(--ink);cursor:pointer;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%230B2545" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');background-repeat:no-repeat;background-position:right 14px center;background-size:16px;padding-right:44px}
   .contact-pref{display:flex;align-items:center;gap:18px;padding:4px 4px 0;font-size:14px;color:var(--muted);flex-wrap:wrap}
@@ -190,6 +215,34 @@
         <p>Growing up, finding a trainer was hard. Pinning down their schedule was harder. Knowing what it was going to cost? Forget it. And the right coach at the right time is what got me to Division 1 football — I know how much it matters.</p>
         <p>I built Trainer so Utah parents don't have to play that game. One place to find a coach you trust, lock in a schedule, and know what's coming next.</p>
         <p class="signature">— Logan Payne, Founder</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="coaches" style="border-top:none;padding-top:0;padding-bottom:80px">
+  <div class="wrap">
+    <div class="kicker">Founding coaches</div>
+    <h2>Meet the people you'll work with.</h2>
+    <p class="lede">Hand-vetted by us. Stand-back-and-watch results. We're only signing 15 founding coaches this season.</p>
+    <div class="coach-grid">
+      <div class="coach-card">
+        <div class="coach-photo"><img src="logan.jpg" alt="Logan Payne, Founding Coach"/></div>
+        <div class="coach-body">
+          <span class="coach-tag">Founding coach · Active BYU player</span>
+          <h3 class="coach-name">Logan Payne</h3>
+          <div class="coach-role">RB / LB · Wasatch Front · Ages 8–18</div>
+          <ul class="coach-creds">
+            <li>Active BYU football player (2025–present, RB/LB)</li>
+            <li>First-team All-State RB · Region 1 Offensive MVP · led Utah 6A in rushing (2021)</li>
+            <li>Specializes in RB &amp; LB drills, speed &amp; agility for youth athletes</li>
+            <li>Trains athletes in Salt Lake, Davis, Weber &amp; Utah counties</li>
+          </ul>
+          <div class="coach-meta">
+            <span class="rate">$50/session · 60 min</span>
+            <a href="/find-coach" class="book">Request Logan →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
